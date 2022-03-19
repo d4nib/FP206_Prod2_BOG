@@ -10,6 +10,8 @@ public class Customer {
     protected String idCardNumber;
     protected static CustomerType type;
     protected ArrayList<Order> orders;
+    private double customerFee = 30;
+    private int customerDiscount;
 
     // CONSTRUCTOR
     public Customer(String firstname, String lastname, String email, String address, String idCardNumber,
@@ -20,23 +22,16 @@ public class Customer {
         this.address = address;
         this.idCardNumber = idCardNumber;
         orders = new ArrayList<Order>();
+        this.customerDiscount = calculateDiscount();
     }
 
-    // CUSTOMER TYPE CHECK
-    // *********************************************************************************************************
-    // */
-    /*
-     * Según demanda del producto faltarían los métodos:
-     * 
-     * public abstract Strig getCustomerType()
-     * public abstract float calcAnual()
-     * public abstract float shippingDiscuount()
-     * 
-     */
+    private int calculateDiscount() {
+        return this.type == CustomerType.PREMIUM ? 20 : 0;
+    }
 
     // SETTERS & GETTERS
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -44,7 +39,7 @@ public class Customer {
     }
 
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     public void setLastname(String lastname) {
@@ -52,7 +47,7 @@ public class Customer {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -60,7 +55,7 @@ public class Customer {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -68,13 +63,35 @@ public class Customer {
     }
 
     public String getIdCardNumber() {
-        return idCardNumber;
+        return this.idCardNumber;
     }
 
-    public void setIdCardNumber(String idCardNumbber) {
-        this.idCardNumber = idCardNumbber;
+    public void setIdCardNumber(String idCardNumber) {
+        this.idCardNumber = idCardNumber;
     }
 
-    // Joan
+    public CustomerType getType() {
+        return this.type;
+    }
+
+    public void setType(CustomerType type) {
+        this.type = type;
+    }
+
+    public double getCustomerFee() {
+        return this.customerFee;
+    }
+
+    public void setCustomerFee(double customerFee) {
+        this.customerFee = customerFee;
+    }
+
+    public int getCustomerDiscount() {
+        return this.customerDiscount;
+    }
+
+    public void setCustomerDiscount(int customerDiscount) {
+        this.customerDiscount = customerDiscount;
+    }
 
 }

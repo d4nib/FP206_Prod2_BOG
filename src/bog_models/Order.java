@@ -6,38 +6,32 @@ public class Order {
     private String orderID;
     private Product product;
     private Customer customer;
-    private int product_qty;
+    private int productQuantity;
     private double subtotal;
-    private double shipingFee;
+    private double shippingFee;
     private LocalDateTime creationDataTime;
     private int handlingTime;
+    private boolean isSent;
 
     // CONSTRUCTOR
-    public Order(String orderID, Product product, Customer customer, int product_qty, double subtotal,
-            double shipingFee,
+    public Order(String orderID, Product product, Customer customer, int productQuantity, double subtotal,
+            double shippingFee,
             LocalDateTime creationDataTime, int handlingTime) {
         this.orderID = orderID;
         this.product = product;
         this.customer = customer;
-        this.product_qty = product_qty;
+        this.productQuantity = productQuantity;
         this.subtotal = subtotal;
-        this.shipingFee = shipingFee;
+        this.shippingFee = shippingFee;
         this.creationDataTime = creationDataTime;
         this.handlingTime = handlingTime;
+
     }
 
     // CHECKERS - Comprueban las políticas de negocio y calculan resultados
-
     public boolean isCancellable() {
 
-        /*
-         * if (LocalTime.now() > this.creationDataTime + handlingTime * 60){
-         * 
-         * }
-         */
-
-        return false;
-
+        return !isSent; // Si esta enviado, no se puede cancelar. Así de simple
     }
 
     public boolean clientExists() {
@@ -46,25 +40,32 @@ public class Order {
     }
 
     public double calculateShipping() {
-        double ret;
-        ret = this.shipingFee;
-        return ret;
+        final double customerDiscount = this.customer.getCustomerDiscount() / 100;
+        final double shippingWithDiscount = customerDiscount > 0 ? this.shippingFee / customerDiscount
+                : this.shippingFee;
+        return shippingWithDiscount;
     }
 
     public double calculateOrderTotal() {
-        double orderTotal;
-
-        orderTotal = product_qty * this.product.getPrice();
-
+        final double productPrice = this.productQuantity * this.product.getPrice();
+        final double shipping = calculateShipping();
+        final double orderTotal = productPrice + shipping;
         return orderTotal;
-
     }
-    // ************************************************************************************
-    /*
-     * Según demanda del producto faltarían los métodos:
-     * public boolean orderSent()
-     * 
-     */
+
+    public boolean orderSent() {
+        // Creamos la fecha en la que el pedido estará lista
+        LocalDateTime handlingResult = creationDataTime.plusDays(handlingTime);
+
+        // Pasada esa fecha el articulo se habrá enviado
+        if (LocalDateTime.now().compareTo(handlingResult) > 0) {
+            isSent = true;
+        } else {
+            isSent = false;
+        }
+
+        return isSent;
+    }
 
     // GETTERS & SETTERS
 
@@ -92,12 +93,12 @@ public class Order {
         this.customer = customer;
     }
 
-    public int getProduct_qty() {
-        return product_qty;
+    public int getproductQuantity() {
+        return productQuantity;
     }
 
-    public void setProduct_qty(int product_qty) {
-        this.product_qty = product_qty;
+    public void setproductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 
     public double getSubtotal() {
@@ -108,12 +109,12 @@ public class Order {
         this.subtotal = subtotal;
     }
 
-    public double getShipingFee() {
-        return shipingFee;
+    public double getShippingFee() {
+        return shippingFee;
     }
 
     public void setShipingFee(double shipingFee) {
-        this.shipingFee = shipingFee;
+        this.shippingFee = shipingFee;
     }
 
     public LocalDateTime getcreationDataTime() {
@@ -136,7 +137,8 @@ public class Order {
     public String toString() {
         return "Order [creationDataTime=" + creationDataTime + ", customer=" + customer + ", handlingTime="
                 + handlingTime + ", product="
-                + product + ", product_qty=" + product_qty + ", shipingFee=" + shipingFee + ", orderID=" + orderID
+                + product + ", productQuantity=" + productQuantity + ", shipingFee=" + shippingFee + ", orderID="
+                + orderID
                 + ", subtotal=" + subtotal + "]";
     }
 
