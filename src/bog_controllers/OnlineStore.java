@@ -1,6 +1,9 @@
 package bog_controllers;
 
 import java.util.Scanner;
+
+import bog_models.CustomerType;
+
 import static java.lang.System.exit;
 
 import bog_views.GestionOS;
@@ -15,6 +18,7 @@ public class OnlineStore {
         for (String option : options) {
             System.out.println("    " + option);
         }
+        System.out.println("");
     }
 
     public static void main(String[] args) throws Exception {
@@ -24,7 +28,13 @@ public class OnlineStore {
                 "Create new customer.........: [1]",
                 "Create new product..........: [2]",
                 "Create new order............: [3]",
-                "Delete order................: [4]",
+                "Show products...............: [4]",
+                "Show customers..............: [5]",
+                "Show regular customers......: [6]",
+                "Show premium customers......: [7]",
+                "Show pending orders.........: [8]",
+                "Show sent orders............: [9]",
+                "Delete order................: [10]",
                 "Exit........................: [0]",
         };
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
@@ -42,6 +52,27 @@ public class OnlineStore {
                         break;
                     case 3:
                         gestionOS.createOrder(scanner);
+                        break;
+                    case 4:
+                        gestionOS.listProducts(scanner);
+                        break;
+                    case 5:
+                        gestionOS.listCustomers(scanner, null);
+                        break;
+                    case 6:
+                        gestionOS.listCustomers(scanner, CustomerType.REGULAR);
+                        break;
+                    case 7:
+                        gestionOS.listCustomers(scanner, CustomerType.PREMIUM);
+                        break;
+                    case 8:
+                        gestionOS.listOrders(scanner, false);
+                        break;
+                    case 9:
+                        gestionOS.listOrders(scanner, true);
+                        break;
+                    case 10:
+                        gestionOS.deleteOrder(scanner);
                         break;
                     case 0:
                         scanner.close();

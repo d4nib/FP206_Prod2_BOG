@@ -31,11 +31,48 @@ public class GestionOS {
   }
 
   public void createProduct(Scanner scanner) {
+    System.out.print("SKU: ");
+    String productId = scanner.next();
+    System.out.print("Description: ");
+    String description = scanner.next();
+    System.out.print("Price: ");
+    double price = scanner.nextDouble();
+    System.out.print("Shipping Fee: ");
+    double shippingFee = scanner.nextDouble();
+    System.out.print("Handling Time: ");
+    int handlingTime = scanner.nextInt();
 
   }
 
   public void createOrder(Scanner scanner) {
+    System.out.print("Customer Email: ");
+    String customerEmail = scanner.next();
+    // Fetch customer data or quit
+    // Print all products skus
+    System.out.print("Product SKU: ");
+    String productId = scanner.next();
+    System.out.print("Quantity: ");
+    int quantity = scanner.nextInt();
 
+  }
+
+  public void listProducts(Scanner scanner) {
+
+  }
+
+  public void listCustomers(Scanner scanner, CustomerType customerType) {
+    // If customerType != nil show customer by type
+    // Else show all customers
+  }
+
+  public void listOrders(Scanner scanner, Boolean sentStatus) {
+    // If sentStatus show sent orders
+    // Else show pending
+  }
+
+  public void deleteOrder(Scanner scanner) {
+    System.out.print("Order ID: ");
+    String orderId = scanner.next(); // No estoy seguro de si orderId es String o int
   }
 
 }

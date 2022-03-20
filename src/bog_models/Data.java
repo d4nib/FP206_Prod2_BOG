@@ -3,65 +3,67 @@ package bog_models;
 import java.util.ArrayList;
 
 public class Data {
-    private ArrayList<Customer> customers;
-    private ArrayList<Product> products;
-    private ArrayList<Order> orders;
+    private CustomerList customers;
+    private ProductList products;
+    private OrderList orders;
 
     public Data() {
-        this.customers = new ArrayList<Customer>();
-        this.products = new ArrayList<Product>();
-        this.orders = new ArrayList<Order>();
+        this.customers = new CustomerList();
+        this.products = new ProductList();
+        this.orders = new OrderList();
     }
 
     // Customer data functions
     public ArrayList<Customer> getCustomers() {
-        return this.customers;
+        return this.customers.getArrayList();
     }
 
-    public void addCustomer(Customer customer) {
-        this.customers.add(customer);
+    public void addCustomer(Customer customer) throws Exception {
+        try {
+            this.customers.add(customer);
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
-    public void removeCustomer(int index) {
-        this.customers.remove(index);
-    }
-
-    public String listCustomers() {
-        return customers.toString(); // FALTA Diferenciar entre Premium y Standard
+    public void deleteCustomer(Customer customer) {
+        this.customers.delete(customer);
     }
 
     // Product data functions
     public ArrayList<Product> getProducts() {
-        return this.products;
+        return this.products.getArrayList();
     }
 
-    public void addProduct(Product p) {
-        this.products.add(p);
+    public void addProduct(Product product) throws Exception {
+        try {
+            this.products.add(product);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public void removeProduct(int index) {
-        this.products.remove(index);
-    }
-
-    public String listProducts() {
-        return products.toString();
+    public void deleteProduct(Product product) {
+        this.products.delete(product);
     }
 
     // Order data functions
     public ArrayList<Order> getOrders() {
-        return orders;
+        return this.orders.getArrayList();
     }
 
-    public void addOrder(Order o) {
-        this.orders.add(o);
+    public void addOrder(Order order) throws Exception {
+        try {
+            this.orders.add(order);
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
-    public void removeOrder(int index) {
-        this.orders.remove(index);
-    }
-
-    public String listOrders() {
-        return orders.toString();
+    public void deleteOrder(Order order) {
+        this.orders.delete(order);
     }
 
 }
