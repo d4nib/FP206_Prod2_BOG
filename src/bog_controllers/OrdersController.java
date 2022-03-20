@@ -10,8 +10,8 @@ public class OrdersController {
   private Data dataStore;
   private OrdersView ordersView;
 
-  public OrdersController() {
-    this.dataStore = new Data();
+  public OrdersController(Data dataStore) {
+    this.dataStore = dataStore;
     this.ordersView = new OrdersView();
   }
 

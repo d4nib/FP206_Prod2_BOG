@@ -10,8 +10,8 @@ public class ProductsController {
   private Data dataStore;
   private ProductsView productsView;
 
-  public ProductsController() {
-    this.dataStore = new Data();
+  public ProductsController(Data dataStore) {
+    this.dataStore = dataStore;
     this.productsView = new ProductsView();
   }
 

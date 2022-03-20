@@ -3,12 +3,24 @@ package bog_views;
 import java.util.Scanner;
 
 import bog_controllers.CustomersController;
+import bog_controllers.OrdersController;
+import bog_controllers.ProductsController;
 import bog_models.Customer;
 import bog_models.CustomerType;
+import bog_models.Data;
 
 public class GestionOS {
+  private Data dataStore;
+  private CustomersController customersController;
+  private OrdersController ordersController;
+  private ProductsController productsController;
 
-  private final CustomersController customersController = new CustomersController();
+  public GestionOS() {
+    this.dataStore = new Data();
+    this.customersController = new CustomersController(this.dataStore);
+    this.productsController = new ProductsController(this.dataStore);
+    this.ordersController = new OrdersController(this.dataStore);
+  }
 
   public void createCustomer(Scanner scanner) {
 
