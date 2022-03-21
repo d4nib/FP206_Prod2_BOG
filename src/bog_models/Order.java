@@ -1,6 +1,12 @@
 package bog_models;
 
+
 import java.time.LocalDateTime;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 import bog_controllers.OrdersController;
 
@@ -13,7 +19,6 @@ public class Order {
     private Customer customer;
     private int productQuantity;
     private double subtotal;
-    private double shippingFee;
     private LocalDateTime creationDataTime;
     private int handlingTime;
     private boolean isSent;
@@ -25,7 +30,6 @@ public class Order {
         this.customer = customer;
         this.productQuantity = productQuantity;
         this.subtotal = this.product.getPrice() * productQuantity;
-        this.shippingFee = calculateShipping();
         this.creationDataTime = LocalDateTime.now();
         this.handlingTime = 2;
 
@@ -35,7 +39,6 @@ public class Order {
         return String.valueOf(orderIDnumber);
     }
     
-
     // CHECKERS - Comprueban las políticas de negocio y calculan resultados
     public boolean isCancellable() {
 
@@ -49,9 +52,14 @@ public class Order {
 
     public double calculateShipping() {
         final double customerDiscount = this.customer.getCustomerDiscount() / 100;
-        final double shippingWithDiscount = customerDiscount > 0 ? this.shippingFee / customerDiscount
-                : this.shippingFee;
+        final double discount = customerDiscount > 0 ? product.getShippingFee() * customerDiscount : product.getShippingFee();
+        final double shippingWithDiscount = product.getShippingFee() - discount;
         return shippingWithDiscount;
+    }
+
+    @Test
+    public void testCalculateShipping(){ //Para que esto funcione debemos pasar el producto 002A y un costumer.Premium.
+        assertEquals(1.6d, calculateShipping(), 0.01); //El 0.001 es el margen de error que tienen los float
     }
 
     public double calculateOrderTotal() {
@@ -59,6 +67,11 @@ public class Order {
         final double shipping = calculateShipping();
         final double orderTotal = productPrice + shipping;
         return orderTotal;
+    }
+
+    @Test
+    public void testCalculateOrderTotal(){ // Este seria el segundo order de la lista de Data. Producto 002A y cliente Premium
+        assertEquals( 41.6, calculateOrderTotal(), 0.01);
     }
 
     public boolean orderSent() {
@@ -75,8 +88,11 @@ public class Order {
         return isSent;
     }
 
-
-
+    @Test
+    public void testOrderSent(){
+        assertTrue(orderSent()); //Esto deberia ser siempre true en el momento que lo probamos
+    }
+    
     // GETTERS & SETTERS
 
     public String getorderID() {
@@ -119,14 +135,6 @@ public class Order {
         this.subtotal = subtotal;
     }
 
-    public double getShippingFee() {
-        return shippingFee;
-    }
-
-    public void setShipingFee(double shipingFee) {
-        this.shippingFee = shipingFee;
-    }
-
     public LocalDateTime getcreationDataTime() {
         return creationDataTime;
     }
@@ -147,7 +155,7 @@ public class Order {
     public String toString() {
         return "Order [creationDataTime=" + creationDataTime + ", customer=" + customer + ", handlingTime="
                 + handlingTime + ", product="
-                + product + ", productQuantity=" + productQuantity + ", shipingFee=" + shippingFee + ", orderID="
+                + product + ", productQuantity=" + productQuantity + ", orderID="
                 + orderID
                 + ", subtotal=" + subtotal + "]";
     }
