@@ -39,4 +39,16 @@ public class ProductsController {
     this.dataStore.deleteProduct(product);
   }
 
+  // Retunr Product for ID/SKU
+  public Product returnProduct (String sku){
+    Product product = null;
+
+    for (int i = 0 ; i < this.dataStore.lenghtProduct(); i++ ){
+      if (sku.equals(this.dataStore.getProducts().get(i).getproductID())){
+        product = this.dataStore.getProducts().get(i);
+      }
+    }
+    return product;
+  }
+
 }

@@ -2,6 +2,7 @@ package bog_models;
 
 import java.time.LocalDateTime;
 
+
 public class Order {
     private String orderID;
     private Product product;
@@ -14,18 +15,21 @@ public class Order {
     private boolean isSent;
 
     // CONSTRUCTOR
-    public Order(String orderID, Product product, Customer customer, int productQuantity, double subtotal,
-            double shippingFee,
-            LocalDateTime creationDataTime, int handlingTime) {
-        this.orderID = orderID;
+    public Order(Product product, Customer customer, int productQuantity) {
+        this.orderID = orderIdGenerator();
         this.product = product;
         this.customer = customer;
         this.productQuantity = productQuantity;
-        this.subtotal = subtotal;
-        this.shippingFee = shippingFee;
-        this.creationDataTime = creationDataTime;
-        this.handlingTime = handlingTime;
+        this.subtotal = this.product.getPrice() * productQuantity;
+        this.shippingFee = calculateShipping();
+        this.creationDataTime = LocalDateTime.now();
+        this.handlingTime = 2;
 
+    }
+
+    public String orderIdGenerator(){
+        int id = this.product.getproductID().length() + 1;
+        return String.valueOf(id);
     }
 
     // CHECKERS - Comprueban las políticas de negocio y calculan resultados
@@ -66,6 +70,8 @@ public class Order {
 
         return isSent;
     }
+
+
 
     // GETTERS & SETTERS
 

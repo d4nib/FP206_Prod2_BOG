@@ -2,23 +2,22 @@ package bog_models;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.Text;
 
 public class Product {
     private String productID;
     private String productName;
-    private Text description;
+    private String description;
     private double price;
     private double shippingFee;
     private int handlingTime;
     private ArrayList<Order> orders;
 
     // CONSTRUCTOR
-    public Product(String productID, String productName, Text description, double price, double shippingFee,
+    public Product(String productID, String productName, String description2, double price, double shippingFee,
             int handlingTime) {
         this.productID = productID;
         this.productName = productName;
-        this.description = description;
+        this.description = description2;
         this.price = price;
         this.shippingFee = shippingFee;
         this.handlingTime = handlingTime;
@@ -42,11 +41,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public Text getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Text description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -81,5 +80,7 @@ public class Product {
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
+
+
 
 }

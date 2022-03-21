@@ -1,6 +1,7 @@
 package bog_models;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Customer {
     protected String firstname;
@@ -92,6 +93,10 @@ public class Customer {
 
     public void setCustomerDiscount(int customerDiscount) {
         this.customerDiscount = customerDiscount;
+    }
+
+    public static Iterator iterator() {
+        return null;
     }
 
 }

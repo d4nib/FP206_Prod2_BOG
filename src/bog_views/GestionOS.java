@@ -1,5 +1,6 @@
 package bog_views;
 
+
 import java.util.Scanner;
 
 import bog_controllers.CustomersController;
@@ -8,6 +9,8 @@ import bog_controllers.ProductsController;
 import bog_models.Customer;
 import bog_models.CustomerType;
 import bog_models.Data;
+import bog_models.Order;
+import bog_models.Product;
 
 public class GestionOS {
   private Data dataStore;
@@ -39,12 +42,14 @@ public class GestionOS {
     CustomerType customerType = CustomerType.valueOf(typeStr.toUpperCase());
 
     final Customer newCustomer = new Customer(firstname, lastname, email, address, idCardNumber, customerType);
-    customersController.create(newCustomer);
+    this.customersController.create(newCustomer);
   }
 
   public void createProduct(Scanner scanner) {
     System.out.print("SKU: ");
     String productId = scanner.next();
+    System.out.print("Name: ");
+    String name = scanner.next();
     System.out.print("Description: ");
     String description = scanner.next();
     System.out.print("Price: ");
@@ -53,22 +58,36 @@ public class GestionOS {
     double shippingFee = scanner.nextDouble();
     System.out.print("Handling Time: ");
     int handlingTime = scanner.nextInt();
+    
+    final Product newProduct = new Product(productId, name, description , price, shippingFee, handlingTime);
+    this.productsController.create(newProduct);
 
   }
 
   public void createOrder(Scanner scanner) {
+    Customer customer;
+    Product product;
+   
+
     System.out.print("Customer Email: ");
     String customerEmail = scanner.next();
-    // Fetch customer data or quit
-    // Print all products skus
+    if (!this.customersController.exists(customerEmail) ){
+      createCustomer(scanner);
+    }
+    customer = this.customersController.returnCustomer(customerEmail);
+    this.productsController.list();
     System.out.print("Product SKU: ");
     String productId = scanner.next();
+    product = this.productsController.returnProduct(productId);
     System.out.print("Quantity: ");
     int quantity = scanner.nextInt();
+    final Order newOrder = new Order(product, customer,  quantity);
+    this.ordersController.create(newOrder);
 
   }
 
   public void listProducts(Scanner scanner) {
+    productsController.list();
 
   }
 

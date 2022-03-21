@@ -31,6 +31,16 @@ public class Data {
         this.customers.delete(customer);
     }
 
+    public boolean existsCustomer(String email){
+        return this.customers.contains(email);
+    }
+
+    public int lenghtCustomer(){
+        return this.customers.getSize();
+    }
+
+
+
     // Product data functions
     public ArrayList<Product> getProducts() {
         return this.products.getArrayList();
@@ -46,6 +56,10 @@ public class Data {
 
     public void deleteProduct(Product product) {
         this.products.delete(product);
+    }
+
+    public int lenghtProduct (){
+        return this.products.getSize();
     }
 
     // Order data functions

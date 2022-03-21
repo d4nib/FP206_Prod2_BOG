@@ -1,14 +1,17 @@
 package bog_controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import bog_models.Customer;
 import bog_models.Data;
 import bog_views.CustomersView;
 
+
 public class CustomersController {
   private Data dataStore;
   private CustomersView customersView;
+  
 
   public CustomersController(Data dataStore) {
     this.dataStore = dataStore;
@@ -39,4 +42,24 @@ public class CustomersController {
     this.dataStore.deleteCustomer(customer);
   }
 
+  // Check if Customer exists
+  public boolean exists(String email){
+    return this.dataStore.existsCustomer(email);
+
+  }
+
+  // Returns Customer for email
+  public Customer returnCustomer(String email){
+    Customer customer = null;
+    try{
+      for (int i = 0 ; i < this.dataStore.lenghtCustomer(); i++ ){
+        if (email.equals(this.dataStore.getCustomers().get(i).getEmail()) ){
+          customer = this.dataStore.getCustomers().get(i);
+        }
+      }
+    } catch(Exception e){
+      customersView.error(e);
+    }
+    return customer;
+  }
 }

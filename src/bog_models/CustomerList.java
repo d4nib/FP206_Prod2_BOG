@@ -15,10 +15,10 @@ public class CustomerList extends List<Customer> {
             this.list.add(customer);
     }
 
-    public boolean contains(String nif) {
+    public  boolean contains(String email) {
         for (Iterator iter = this.list.iterator(); iter.hasNext();) {
             Customer c = (Customer) iter.next();
-            if (c.getIdCardNumber().equals(nif)) {
+            if (c.getEmail().equals(email)) {
                 return true;
             }
         }
