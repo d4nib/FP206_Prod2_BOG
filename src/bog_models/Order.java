@@ -2,8 +2,12 @@ package bog_models;
 
 import java.time.LocalDateTime;
 
+import bog_controllers.OrdersController;
+
+
 
 public class Order {
+    public static int orderIDnumber;
     private String orderID;
     private Product product;
     private Customer customer;
@@ -16,7 +20,7 @@ public class Order {
 
     // CONSTRUCTOR
     public Order(Product product, Customer customer, int productQuantity) {
-        this.orderID = orderIdGenerator();
+        this.orderID = orderID;
         this.product = product;
         this.customer = customer;
         this.productQuantity = productQuantity;
@@ -26,11 +30,11 @@ public class Order {
         this.handlingTime = 2;
 
     }
-
-    public String orderIdGenerator(){
-        int id = this.product.getproductID().length() + 1;
-        return String.valueOf(id);
+    public static String orderIdGenerator(){
+        orderIDnumber++;
+        return String.valueOf(orderIDnumber);
     }
+    
 
     // CHECKERS - Comprueban las políticas de negocio y calculan resultados
     public boolean isCancellable() {

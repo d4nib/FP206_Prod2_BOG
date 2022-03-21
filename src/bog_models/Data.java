@@ -2,7 +2,7 @@ package bog_models;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.Text;
+
 
 public class Data {
     private CustomerList customers;
@@ -135,5 +135,7 @@ public class Data {
     public int lenghtOrders(){
         return this.orders.getSize();
     }
+
+   
 
 }
