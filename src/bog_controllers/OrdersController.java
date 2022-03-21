@@ -39,4 +39,17 @@ public class OrdersController {
     dataStore.deleteOrder(order);
   }
 
+  // Return Order from ID/SKU
+
+  public Order returnOrder(String id){
+    Order order = null;
+    for (int i = 0; i < this.dataStore.lenghtOrders(); i++){
+      if (id.equals(this.dataStore.getOrders().get(i).getorderID())){
+        order = this.dataStore.getOrders().get(i);
+      }
+    }
+
+    return order;
+  }
+
 }

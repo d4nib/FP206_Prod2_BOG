@@ -102,8 +102,11 @@ public class GestionOS {
   }
 
   public void deleteOrder(Scanner scanner) {
+    Order order;
     System.out.print("Order ID: ");
     String orderId = scanner.next(); // No estoy seguro de si orderId es String o int
+    order =this.ordersController.returnOrder(orderId);
+    this.ordersController.delete(order);
   }
 
 }

@@ -80,4 +80,8 @@ public class Data {
         this.orders.delete(order);
     }
 
+    public int lenghtOrders(){
+        return this.orders.getSize();
+    }
+
 }
