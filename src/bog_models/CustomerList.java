@@ -16,7 +16,7 @@ public class CustomerList extends List<Customer> {
     }
 
     public  boolean contains(String email) {
-        for (Iterator iter = this.list.iterator(); iter.hasNext();) {
+        for (Iterator<Customer> iter = this.list.iterator(); iter.hasNext();) {
             Customer c = (Customer) iter.next();
             if (c.getEmail().equals(email)) {
                 return true;

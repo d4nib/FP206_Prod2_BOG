@@ -7,6 +7,8 @@ package bog_models;
 
 import java.util.Iterator;
 
+
+
 /**
  *
  * @author irene
@@ -21,7 +23,7 @@ public class ProductList extends List<Product> {
     }
 
     public boolean contains(String productID) {
-        for (Iterator iter = this.list.iterator(); iter.hasNext();) {
+        for (Iterator<Product> iter = this.list.iterator(); iter.hasNext();) {
             Product p = (Product) iter.next();
             if (p.getproductID().equals(productID)) {
                 return true;

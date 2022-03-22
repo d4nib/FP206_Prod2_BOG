@@ -1,7 +1,7 @@
 package bog_models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class Customer {
     protected String firstname;
@@ -27,7 +27,7 @@ public class Customer {
     }
 
     private int calculateDiscount() {
-        return this.type == CustomerType.PREMIUM ? 20 : 0;
+        return Customer.type == CustomerType.PREMIUM ? 20 : 0;
     }
 
     // SETTERS & GETTERS
@@ -72,11 +72,11 @@ public class Customer {
     }
 
     public CustomerType getType() {
-        return this.type;
+        return Customer.type;
     }
 
     public void setType(CustomerType type) {
-        this.type = type;
+        Customer.type = type;
     }
 
     public double getCustomerFee() {
@@ -95,8 +95,5 @@ public class Customer {
         this.customerDiscount = customerDiscount;
     }
 
-    public static Iterator iterator() {
-        return null;
-    }
-
+   
 }

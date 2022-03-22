@@ -21,7 +21,7 @@ public class OrderList extends List<Order> {
     }
 
     public boolean contains(String orderID) {
-        for (Iterator iter = this.list.iterator(); iter.hasNext();) {
+        for (Iterator<Order> iter = this.list.iterator(); iter.hasNext();) {
             Order o = (Order) iter.next();
             if (o.getorderID().equals(orderID)) {
                 return true;
