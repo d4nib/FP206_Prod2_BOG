@@ -53,7 +53,7 @@ public class Order {
 
     public double calculateShipping() {
         final double customerDiscount = this.customer.getCustomerDiscount() / 100;
-        final double discount = customerDiscount > 0 ? product.getShippingFee() * customerDiscount : product.getShippingFee();
+        final double discount = customerDiscount > 0 ? product.getShippingFee() * customerDiscount : 0;
         final double shippingWithDiscount = product.getShippingFee() - discount;
         return shippingWithDiscount;
     }
