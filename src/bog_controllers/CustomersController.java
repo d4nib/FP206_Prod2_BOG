@@ -18,11 +18,22 @@ public class CustomersController {
     this.customersView = new CustomersView();
   }
 
-  // List all
+  // List Methods
   public void list() {
     final ArrayList<Customer> customers = dataStore.getCustomers();
     this.customersView.renderAll(customers);
   }
+
+  public void listPremium() {
+    ArrayList<Customer> customers = dataStore.getPremiumCustomers();
+    this.customersView.renderAll(customers);
+  }
+  public void listRegular() {
+    ArrayList<Customer> customers = dataStore.getRegularCustomers();
+    this.customersView.renderAll(customers);
+  }
+
+
 
   // Create
   public void create(Customer customer) {

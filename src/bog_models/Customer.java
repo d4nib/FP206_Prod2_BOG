@@ -9,7 +9,7 @@ public class Customer {
     protected String email;
     protected String address;
     protected String idCardNumber;
-    protected static CustomerType type;
+    protected CustomerType type;
     protected ArrayList<Order> orders;
     private double customerFee = 30;
     private int customerDiscount;
@@ -27,7 +27,7 @@ public class Customer {
     }
 
     private int calculateDiscount() {
-        return Customer.type == CustomerType.PREMIUM ? 20 : 0;
+        return this.type == CustomerType.PREMIUM ? 20 : 0;
     }
 
     // SETTERS & GETTERS
@@ -72,11 +72,11 @@ public class Customer {
     }
 
     public CustomerType getType() {
-        return Customer.type;
+        return this.type;
     }
 
     public void setType(CustomerType type) {
-        Customer.type = type;
+       this.type = type;
     }
 
     public double getCustomerFee() {

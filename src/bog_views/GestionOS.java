@@ -92,9 +92,18 @@ public class GestionOS {
 
   public void listCustomers(Scanner scanner, CustomerType customerType) {
     // If customerType != nil show customer by type
-  
+    if (customerType != null){
+      if (customerType == CustomerType.REGULAR){
+        customersController.listRegular();
+      }
+      if (customerType == CustomerType.PREMIUM){
+        customersController.listPremium();
+      }
+    }
+    else {
     // Else show all customers
     customersController.list();
+    }
   }
 
   public void listOrders(Scanner scanner, Boolean sentStatus) {

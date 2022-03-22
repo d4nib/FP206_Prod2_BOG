@@ -12,7 +12,7 @@ public class CustomersView {
 
   public void renderAll(ArrayList<Customer> customers) {
     for (Customer customer : customers) {
-      System.out.println(customer.getFirstname() + " " + customer.getLastname());
+      System.out.println(customer.getFirstname() + " " + customer.getLastname() + " | " + customer.getType());
     }
   }
 

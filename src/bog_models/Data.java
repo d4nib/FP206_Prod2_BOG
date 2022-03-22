@@ -74,6 +74,28 @@ public class Data {
         return this.customers.getArrayList();
     }
 
+    public ArrayList<Customer> getPremiumCustomers(){
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+
+        for (int i=0; i < this.customers.getSize(); i++){
+            if (this.customers.getAt(i).getType() == CustomerType.PREMIUM){
+                customers.add(this.customers.getAt(i));
+            }
+        }
+        return customers;
+    }
+
+    public ArrayList<Customer> getRegularCustomers(){
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+
+        for (int i=0; i < this.customers.getSize(); i++){
+            if (this.customers.getAt(i).getType() == CustomerType.REGULAR){
+                customers.add(this.customers.getAt(i));
+            }
+        }
+        return customers;
+    }
+
     public void addCustomer(Customer customer) throws Exception {
         try {
             this.customers.add(customer);
