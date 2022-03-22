@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import bog_controllers.OrdersController;
+
 
 
 
@@ -25,7 +25,7 @@ public class Order {
 
     // CONSTRUCTOR
     public Order(Product product, Customer customer, int productQuantity) {
-        this.orderID = orderID;
+        this.orderID = orderIdGenerator();
         this.product = product;
         this.customer = customer;
         this.productQuantity = productQuantity;
@@ -34,6 +34,7 @@ public class Order {
         this.handlingTime = 2;
 
     }
+    // Generador de Order ID
     public static String orderIdGenerator(){
         orderIDnumber++;
         return String.valueOf(orderIDnumber);

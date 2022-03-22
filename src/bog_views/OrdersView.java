@@ -12,7 +12,7 @@ public class OrdersView {
 
   public void renderAll(ArrayList<Order> orders) {
     for (Order order : orders) {
-      System.out.println(order.getorderID() + " " + order.getProduct() + " " + order.getcreationDataTime());
+      System.out.println(order.getorderID() + " | " + order.getProduct().getProductName() + " | " + order.getcreationDataTime() + " | " + order.getCustomer().getFirstname() );
     }
   }
 
