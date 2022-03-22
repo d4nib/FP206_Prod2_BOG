@@ -68,7 +68,6 @@ public class GestionOS {
     Customer customer;
     Product product;
    
-
     System.out.print("Customer Email: ");
     String customerEmail = scanner.next();
     if (!this.customersController.exists(customerEmail) ){
@@ -93,14 +92,21 @@ public class GestionOS {
 
   public void listCustomers(Scanner scanner, CustomerType customerType) {
     // If customerType != nil show customer by type
+  
     // Else show all customers
     customersController.list();
   }
 
   public void listOrders(Scanner scanner, Boolean sentStatus) {
     // If sentStatus show sent orders
-    // Else show pending
-    ordersController.list();
+    if (sentStatus){
+      ordersController.listSentOrders();
+      // Else show pending
+    } 
+    else if (!sentStatus){
+      ordersController.listPendingOrders();
+    }
+    else {ordersController.list();}
   }
 
   public void deleteOrder(Scanner scanner) {

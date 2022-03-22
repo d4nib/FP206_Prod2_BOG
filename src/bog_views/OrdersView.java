@@ -7,7 +7,7 @@ import bog_models.Order;
 public class OrdersView {
 
   public void render(Order order) {
-    System.out.println(order.getorderID() + " " + order.getProduct() + " " + order.getcreationDataTime());
+    System.out.println(order.getorderID() + " | " + order.getProduct().getProductName() + " | " + order.getcreationDataTime() + " | " + order.getCustomer().getFirstname());
   }
 
   public void renderAll(ArrayList<Order> orders) {

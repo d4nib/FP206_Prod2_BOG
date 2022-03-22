@@ -17,9 +17,22 @@ public class OrdersController {
 
   // List all
   public void list() {
-    final ArrayList<Order> customers = dataStore.getOrders();
-    this.ordersView.renderAll(customers);
+    final ArrayList<Order> orders = dataStore.getOrders();
+    this.ordersView.renderAll(orders);
   }
+
+  // List Sent Orders
+  public void listSentOrders(){
+    ArrayList<Order> orders = dataStore.getSentOrders();
+    this.ordersView.renderAll(orders);
+  }
+
+  // List Pending Orders
+  public void listPendingOrders(){
+    ArrayList<Order> orders = dataStore.getPendingOrders();
+    this.ordersView.renderAll(orders);
+  }
+
 
   // Create
   public void create(Order order) {
@@ -40,7 +53,6 @@ public class OrdersController {
   }
 
   // Return Order from ID/SKU
-
   public Order returnOrder(String id){
     Order order = null;
     for (int i = 0; i < this.dataStore.lenghtOrders(); i++){
@@ -48,8 +60,11 @@ public class OrdersController {
         order = this.dataStore.getOrders().get(i);
       }
     }
-
     return order;
   }
+
+
+
+
 
 }

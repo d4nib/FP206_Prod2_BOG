@@ -85,9 +85,9 @@ public class Data {
     public boolean existsCustomer(String email){
         return this.customers.contains(email);
     }
-
+    
     public int lenghtCustomer(){
-        return this.customers.getSize();
+        return this.customers.getSize(); // Devuelve int con longitiud del array Customer
     }
 
     public void deleteCustomer(Customer customer) {
@@ -127,7 +127,7 @@ public class Data {
         }
 
     }
-
+    
     public void deleteOrder(Order order) {
         this.orders.delete(order);
     }
@@ -135,6 +135,33 @@ public class Data {
     public int lenghtOrders(){
         return this.orders.getSize();
     }
+
+    public ArrayList<Order> getSentOrders(){
+        ArrayList<Order> ordersSent = new ArrayList<Order>();
+
+        for (int i = 0; i < this.orders.getSize(); i++){
+            if (this.orders.getAt(i).orderSent()){
+                ordersSent.add(this.orders.getAt(i));
+            }
+        }
+        return ordersSent; 
+    }
+
+    public ArrayList<Order> getPendingOrders(){
+        ArrayList<Order> ordersPending = new ArrayList<Order>();
+
+        for (int i = 0; i < this.orders.getSize(); i++){
+            if (!this.orders.getAt(i).orderSent()){
+                ordersPending.add(this.orders.getAt(i));
+
+            }
+        }
+        return ordersPending; 
+    }
+
+
+
+
 
    
 
