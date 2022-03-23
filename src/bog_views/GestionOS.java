@@ -26,7 +26,7 @@ public class GestionOS {
   }
 
   public void createCustomer(Scanner scanner) {
-
+    System.out.println("=== Create Customer: ");
     System.out.print("First name: ");
     String firstname = scanner.next();
     System.out.print("Last name: ");
@@ -46,6 +46,7 @@ public class GestionOS {
   }
 
   public void createProduct(Scanner scanner) {
+    System.out.println("=== Create Product: ");
     System.out.print("SKU: ");
     String productId = scanner.next();
     System.out.print("Name: ");
@@ -67,12 +68,13 @@ public class GestionOS {
   public void createOrder(Scanner scanner) {
     Customer customer;
     Product product;
-   
+    System.out.println("=== Create Order: ");
     System.out.print("Customer Email: ");
     String customerEmail = scanner.next();
     if (!this.customersController.exists(customerEmail) ){
-      createCustomer(scanner);
-    }
+      System.out.print("* Enter new customer: \n");
+      this.createCustomer(scanner);
+    } else System.out.print("* This customer is aready in data base \n");
     customer = this.customersController.returnCustomer(customerEmail);
     this.productsController.list();
     System.out.print("Product SKU: ");
@@ -123,7 +125,10 @@ public class GestionOS {
     System.out.print("Order ID: ");
     String orderId = scanner.next(); // No estoy seguro de si orderId es String o int
     order =this.ordersController.returnOrder(orderId);
-    this.ordersController.delete(order);
+    if (order.isCancellable()){
+      this.ordersController.delete(order);
+    }
+    else System.out.println ("This Order is not cancellable");
   }
 
 }
