@@ -11,8 +11,8 @@ public class Customer {
     protected String idCardNumber;
     protected CustomerType type;
     protected ArrayList<Order> orders;
-    private double customerFee = 30;
-    private int customerDiscount;
+    protected double customerFee;
+    protected int customerDiscount;
 
     // CONSTRUCTOR
     public Customer(String firstname, String lastname, String email, String address, String idCardNumber,
@@ -24,10 +24,16 @@ public class Customer {
         this.idCardNumber = idCardNumber;
         orders = new ArrayList<Order>();
         this.customerDiscount = calculateDiscount();
+        this.type = type;
+        this.customerFee = calculateSippingFee();
     }
 
     private int calculateDiscount() {
         return this.type == CustomerType.PREMIUM ? 20 : 0;
+    }
+
+    private double calculateSippingFee(){
+        return this.type == CustomerType.PREMIUM ? 30 : 0;
     }
 
     // SETTERS & GETTERS
